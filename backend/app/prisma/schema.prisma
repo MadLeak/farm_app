@@ -1,0 +1,37 @@
+datasource db {
+  // could be postgresql or mysql
+  provider = "postgresql"
+  url      = "postgres://postgres:031722@127.0.0.1:5432/farmapp"
+}
+
+generator client {
+  provider             = "prisma-client-py"
+  interface            = "asyncio"
+  recursive_type_depth = 5
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+
+  firstName String
+  lastName  String
+  email     String
+  password  String
+  role      Role
+
+  dateOfBirth  DateTime?
+  profileImage String?
+  addressOne   String?
+  addressTwo   String?
+  zipCode      String?
+  phoneNumer   String?
+}
+
+enum Role {
+  CLIENT
+  PROVIDER
+  ADMINISTRATOR
+  DEVELOPER
+}
